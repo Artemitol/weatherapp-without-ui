@@ -56,9 +56,10 @@ ul, ol {
 }
 
 :root {
-  --color-dark: #0B132A;
-  --color-light: #ffffff;
-  --color-accent: #004cff;
+  --color-dark: #000;
+  --color-light: #fff;
+  --color-main: #B62997;
+  --color-accent: #c4ef36;
   --h1-font-size: 70px;
   --h2-font-size: 60px;
   --h3-font-size: 50px;
@@ -73,7 +74,7 @@ ul, ol {
   --font-size: 16px;
   --border: 1px solid var(--color-dark);
   --box-shadow: 1 1 var(--color-dark);
-  --border-radius: 10px;
+  --border-radius: 8px;
   --transition-duration: 0.2s;
 }
 
@@ -178,12 +179,145 @@ ul, ol {
 
 .site-wrapper {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .site-content {
   max-width: calc(1280 - var(--site-padding-x) * 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 html {
   font-size: 16px;
+}
+
+.button {
+  padding: 10px 30px;
+  background-color: #c4ef36;
+  color: #000;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 18px;
+  transition-duration: 0.2s;
+}
+@media (hover: hover) {
+  .button:hover {
+    background-color: #9fc329;
+  }
+}
+@media (hover: none) {
+  .button:active {
+    background-color: #9fc329;
+  }
+}
+@media (hover: hover) {
+  .button:active {
+    background-color: #79951e;
+  }
+}
+
+.input {
+  padding: 10px 10px;
+  background-color: #B62997;
+  font-size: 18px;
+  color: #fff;
+  border: 2px solid #000;
+  border-radius: var(--border-radius);
+  transition-duration: 0.2s;
+}
+.input::-moz-placeholder {
+  color: #cccccc;
+}
+.input::placeholder {
+  color: #cccccc;
+}
+.input:focus {
+  outline: none;
+  background-color: #c4ef36;
+  color: #000;
+  border: 2px solid #B62997;
+}
+.input:focus::-moz-placeholder {
+  color: #2c2c2c;
+}
+.input:focus::placeholder {
+  color: #2c2c2c;
+}
+
+.text-display {
+  font-size: 16px;
+}
+.text-display__value {
+  cursor: initial;
+  padding: 5px 5px;
+  border: none;
+  outline: none;
+  border-radius: var(--border-radius);
+}
+.text-display__value--centered-text {
+  text-align: center;
+}
+.text-display__value--color-accent {
+  background-color: #c4ef36;
+}
+.text-display__label {
+  color: #fff;
+}
+.text-display--with-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: 10px;
+  align-items: start;
+}
+
+.section {
+  margin-block: 100px;
+}
+
+.header {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #c4ef36;
+  color: #000;
+  font-size: 50px;
+}
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+.weather-app__weather-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.weather-app__content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  background-color: #B62997;
+  border-radius: var(--border-radius);
+}
+.weather-app__title {
+  font-size: 25px;
+}
+
+.input-field {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.input-field__input {
+  height: 100%;
 }/*# sourceMappingURL=main.css.map */

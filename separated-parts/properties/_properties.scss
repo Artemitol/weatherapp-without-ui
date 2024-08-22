@@ -9,9 +9,10 @@ $mobile-middle: 480;
 
 :root {
     // COLOR
-    --color-dark: #0B132A;
-    --color-light: #ffffff;
-    --color-accent: #004cff;
+    --color-dark: #000;
+    --color-light: #fff;
+    --color-main: #B62997;
+    --color-accent: #c4ef36;
     
     // FONT SIZE
     --h1-font-size: 70px;
@@ -34,7 +35,7 @@ $mobile-middle: 480;
     // DECORATIONS
     --border: 1px solid var(--color-dark);
     --box-shadow: 1 1 var(--color-dark);
-    --border-radius: 10px;
+    --border-radius: 8px;
 
     // ANIMATIONS 
     --transition-duration: 0.2s;

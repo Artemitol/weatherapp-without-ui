@@ -11,12 +11,63 @@
         <div class="site-content">
             <header class="header">
                 <div class="header__inner">
-                    <!-- TODO: add header -->
+                    <div class="header__text">
+                        Weather app without ui
+                    </div>
                 </div>
             </header>
             <main class="main">
                 <section class="section">
-                    <!-- TODO: add your website -->
+                    <div class="weather-app">
+                        <div class="weather-app__input input-field">
+                            <input class="input-field__input input" id="weather-textfield" type="text" name="city" placeholder="enter city name">
+                            <button class="input-field__button button" id="weather-button" type="button">Find weather</button>
+                        </div>
+                        <div class="weather-app__weather-card" id="weather-card">
+                            <div class="weather-app__title">
+                                <div class="text-display">
+                                    <input 
+                                        readonly 
+                                        type="text" 
+                                        class="
+                                            weather-app__city-name
+                                            text-display__value
+                                            text-display__value--centered-text
+                                        "
+                                    >
+                                </div>
+                            </div>
+                            <div class="weather-app__content">
+                                <div class="
+                                        weather-app__temperature 
+                                        text-display 
+                                        text-display--with-label
+                                    "
+                                >
+                                    <label class="text-display__label" for="">Temperature</label>
+                                    <input 
+                                        readonly 
+                                        type="text" 
+                                        class="
+                                            text-display__value 
+                                            text-display__value--color-accent
+                                        "
+                                    >
+                                </div>
+                                <div class="weather-app__typeof-weather text-display text-display--with-label">
+                                    <label class="text-display__label" for="">Type of weather</label>
+                                    <input 
+                                        readonly 
+                                        type="text" 
+                                        class="
+                                            text-display__value 
+                                            text-display__value--color-accent
+                                        "
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </main>
             <footer class="footer">
@@ -26,5 +77,6 @@
             </footer>
         </div>
     </div>
+    <script src="./separated-parts/blocks/weather-app/weather-app.js"></script>
 </body>
 </html>
