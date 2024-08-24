@@ -291,6 +291,17 @@ html {
   font-size: 50px;
 }
 
+.modal-frame {
+  position: absolute;
+  z-index: 2;
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius);
+  color: var(--color-dark);
+}
+
 .weather-app {
   display: flex;
   flex-direction: column;
