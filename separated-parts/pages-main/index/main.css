@@ -73,6 +73,7 @@ ul, ol {
   --h6-font-size: 20px;
   --p-font-size: 18px;
   --site-padding-x: 100px;
+  --header-height: 50px;
   --alerts-row-gap: 4px;
   --font-family-main: "Space Grotesk", sans-serif;
   --font-style: normal;
@@ -288,13 +289,14 @@ html {
 
 .header {
   width: 100vw;
+  height: var(--header-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #c4ef36;
   color: #000;
-  font-size: 50px;
+  font-size: 35px;
 }
 
 .modal-frame {
@@ -302,7 +304,6 @@ html {
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
-  padding-inline: 4px;
 }
 .modal-frame * {
   -webkit-user-select: none;
@@ -344,10 +345,12 @@ html {
 }
 
 .messages-container {
+  padding: 6px;
   width: 100%;
   height: auto;
   position: absolute;
-  top: 50px;
+  top: var(--header-height);
+  overflow: visible;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: var(--alerts-row-gap);

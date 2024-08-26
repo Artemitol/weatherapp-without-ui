@@ -1,12 +1,11 @@
 .modal-frame {
-    & * {
-        user-select: none;
-    }
-
     z-index: 2;
     width: 100%;
     height: fit-content;
-    padding-inline: 4px;
+
+    & * {
+        user-select: none;
+    }
 
     &__inner {
         padding-inline: 20px;

@@ -1,8 +1,10 @@
 .messages-container { 
+    padding: 6px;
     width: 100%;
     height: auto;
     position: absolute;
-    top: 50px;
+    top: var(--header-height);
+    overflow: visible;
     display: grid;
     grid-template-columns: 1fr;
     row-gap: var(--alerts-row-gap);

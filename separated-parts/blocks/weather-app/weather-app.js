@@ -19,35 +19,92 @@ document.addEventListener("keypress", (event) => {
 async function buttonHandler(event) {
     const cityName = getCurrentCity()
 
-    if (cityName) {
-        try {
-            // you need to have entered openweathermap api key
-            let apiKey = await readFile("../../../api-key.txt")
+    try {
+        const weatherApikey = await getApiKey("../../../weather-api-key.txt")
+        const geocodingApiKey = await getApiKey("../../../geocoding-api-key.txt")
 
-            // Geting coordinates of entered city
-            const cityParametrs = await getCityParams(cityName, apiKey)
+        console.log(geocodingApiKey)
+        if (cityName) {
+            const weather = await getWeather(cityName, geocodingApiKey)
+
+            console.log(weather)
         }
-        catch(err) {
-            throw new Error("haven`t entered api key of openweathermap")
+        else {
+            const alert = createAlertMessage("Error: enter city name")
+
+            displayAlert(alert, 3)
         }
     }
-    else {
-        alert("enter city name")
+    catch(err) {
+        displayAlert(createAlertMessage(err), 6)
+    }
+}
+
+async function getWeather(city, apiKey) {
+    const weather = getCityCoordinates(city, apiKey)
+
+    return weather
+}
+
+async function getApiKey(path) {
+    try {
+        // you need to have entered api key
+        let apiKey = await readFile(path)
+
+        return apiKey
+    }
+    catch(err) {
+        throw new Error("haven`t entered api key")
+    }
+}
+
+function displayAlert(alert, delayBeforeClose) {
+    const messagesContainer = document.getElementById("alerts-container")
+
+    messagesContainer.prepend(alert)
+
+    if (delayBeforeClose) {
+        setTimeout(() => {closeButtonHandler(alert)}, delayBeforeClose * 1000) 
     }
 }
 
 function createAlertMessage(messageText) {
-    const messagesContainer = document.querySelector(".messages-container")
-    
+    const alert = document.createElement("div")
+    const alertInner = document.createElement("div")
+    const alertMessage = document.createElement("span")
+    const alertIcon = document.createElement("span")
 
-    if (messagesContainer) {
+    alert.classList.add("modal-frame")
+    alertInner.classList.add("modal-frame__inner")
+    alertMessage.classList.add("modal-frame__text")
+    alertIcon.classList.add("modal-frame__icon")
 
+    alertMessage.innerText = messageText
+    alertIcon.innerHTML = "<b>&times;</b>"
+
+    alertInner.append(alertMessage, alertIcon)
+    alert.append(alertInner)
+
+    return alert
+}
+
+async function getCityCoordinates(cityName, apiKey) {
+    const url = `https://api.geocodify.com/v2/geocode?api_key=${apiKey}&q=${cityName}`
+
+    try {
+        const req = await request(url)
+
+        return req
+    }
+    catch(err) {
+        displayAlert(createAlertMessage("cant get city coordinates"), 5)
+        throw new Error(err)
     }
 }
 
-async function getCityParams(cityName, apiKey) {
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
-    console.log(url)
+async function getCityParams(lat, lon, apiKey) {
+    const url = ""
+
     try {
         const responce = await request(url)
 
@@ -62,10 +119,11 @@ async function request(url) {
     const request = await fetch(url)
 
     if (request.status === 200) {
-        const responce = request.json
+        const responce = request.json()
 
         return responce
-    } else {
+    } 
+    else {
         throw new Error("failed to fetch")
     }
 }
