@@ -26,6 +26,10 @@ img, picture, video, canvas, svg {
     display: block;
     max-width: 100%;
 }
+
+svg {
+    width: fit-content;
+}
 /*
 6. Remove built-in form typography styles
 */

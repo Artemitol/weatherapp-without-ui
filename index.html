@@ -57,12 +57,12 @@
                                 <div class="weather-app__typeof-weather text-display text-display--with-label">
                                     <label class="text-display__label" for="">Type of weather</label>
                                     <input 
-                                        readonly 
-                                        type="text" 
                                         class="
                                             text-display__value 
                                             text-display__value--color-accent
                                         "
+                                        readonly 
+                                        type="text" 
                                     >
                                 </div>
                             </div>
@@ -77,10 +77,22 @@
             </footer>
         </div>
     </div>
-    <script src="./separated-parts/blocks/weather-app/weather-app.js"></script>
-    <script src="./separated-parts/blocks/modal-frame/modal-frame.js"></script>
-    <div class="modal-frame">
-        Something went wrong
+    <div class="messages-container">
+        <div class="modal-frame">
+            <div class="modal-frame__inner">
+                <span class="modal-frame__text">Something went wrong</span>
+                <span class="modal-frame__icon"><b>&times;</b></span>
+            </div>
+        </div>
+        <div class="modal-frame">
+            <div class="modal-frame__inner">
+                <span class="modal-frame__text">Something went not wrong</span>
+                <span class="modal-frame__icon"><b>&times;</b></span>
+            </div>
+        </div>
     </div>
+    <script src="./separated-parts/blocks/weather-app/weather-app.js"></script>
+    <script src="./separated-parts/blocks/messages-container/messages-container.js"></script>
+    <script src="./separated-parts/blocks/modal-frame/modal-frame.js"></script>
 </body>
 </html>

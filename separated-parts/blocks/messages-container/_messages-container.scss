@@ -1,0 +1,9 @@
+.messages-container { 
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: var(--alerts-row-gap);
+}

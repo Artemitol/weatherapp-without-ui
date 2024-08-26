@@ -8,31 +8,67 @@ document.addEventListener("click", (Event) => {
     if (target === button) {
         buttonHandler()
     }
-    
-    async function buttonHandler(event) {
-        const cityName = getCurrentCity()
+})
 
-        if (cityName) {
-            try {
-                let apiKey = await readFile("../../../ai-key.txt")
-                const cityCoord = await getCityCoordinates(cityName, apiKey)
-            }
-            catch(err) {
-                throw new Error("haven`t entered api key of openweathermap")
-            }
-        }
-        else {
-            
-        }
-    }
-    async function getCityCoordinates(cityName, apiKey) {
-        const url = `http://api.openweathermap.org/geo/1.0/direct?q={${cityName}}&limit=1&appid={${apiKey}}`
-        
+document.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        buttonHandler(event)
     }
 })
 
-let result = null
-readFile("/api-key.txt").then(value =>{result = value}).catch()
+async function buttonHandler(event) {
+    const cityName = getCurrentCity()
+
+    if (cityName) {
+        try {
+            // you need to have entered openweathermap api key
+            let apiKey = await readFile("../../../api-key.txt")
+
+            // Geting coordinates of entered city
+            const cityParametrs = await getCityParams(cityName, apiKey)
+        }
+        catch(err) {
+            throw new Error("haven`t entered api key of openweathermap")
+        }
+    }
+    else {
+        alert("enter city name")
+    }
+}
+
+function createAlertMessage(messageText) {
+    const messagesContainer = document.querySelector(".messages-container")
+    
+
+    if (messagesContainer) {
+
+    }
+}
+
+async function getCityParams(cityName, apiKey) {
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
+    console.log(url)
+    try {
+        const responce = await request(url)
+
+        return responce
+    }   
+    catch(err) {
+        throw new Error(err)
+    }
+}
+
+async function request(url) {
+    const request = await fetch(url)
+
+    if (request.status === 200) {
+        const responce = request.json
+
+        return responce
+    } else {
+        throw new Error("failed to fetch")
+    }
+}
 
 async function readFile(url) {
     try {
@@ -55,7 +91,7 @@ async function getFile(url) {
         return result 
     }
     else {
-        alert(`file with path: "${url}" doesnot exists`)
+        console.log(`file with path: "${url}" doesnot exists`)
         throw new Error("file doesn`t exists")
     }
 }
