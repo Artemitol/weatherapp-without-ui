@@ -25,7 +25,7 @@ async function buttonHandler(event) {
 
         console.log(geocodingApiKey)
         if (cityName) {
-            const weather = await getWeather(cityName, geocodingApiKey)
+            const weather = await getWeather(cityName, geocodingApiKey, weatherApikey)
 
             console.log(weather)
         }
@@ -36,14 +36,23 @@ async function buttonHandler(event) {
         }
     }
     catch(err) {
-        displayAlert(createAlertMessage(err), 6)
+        displayAlert(createAlertMessage(err), 10)
+        console.log(err)
     }
 }
 
-async function getWeather(city, apiKey) {
-    const weather = getCityCoordinates(city, apiKey)
+async function getWeather(city, geocodingApiKey, weatherApiKey) {
+    try {
+        const cityCoordinates = await getCityCoordinates(city, geocodingApiKey)
+        const {lat, lon} = cityCoordinates
+        console.log(lat, lon)
+        const weather = await getCityForecast({lat, lon, apiKey: weatherApiKey})
 
-    return weather
+        return weather
+    }
+    catch(err) {
+        throw new Error(`weather service not working, error message: ${err}`)
+    }
 }
 
 async function getApiKey(path) {
@@ -93,8 +102,18 @@ async function getCityCoordinates(cityName, apiKey) {
 
     try {
         const req = await request(url)
+        const result = {
+            lat: 0,
+            lon: 0,
+        }
 
-        return req
+        const response = req?.response
+        const coordinates = response.features[0].geometry.coordinates
+
+        result.lon = coordinates[0]
+        result.lat = coordinates[1]
+
+        return result
     }
     catch(err) {
         displayAlert(createAlertMessage("cant get city coordinates"), 5)
@@ -102,8 +121,8 @@ async function getCityCoordinates(cityName, apiKey) {
     }
 }
 
-async function getCityParams(lat, lon, apiKey) {
-    const url = ""
+async function getCityForecast({lat, lon, apiKey}) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
     try {
         const responce = await request(url)
@@ -181,3 +200,7 @@ const getTextValue = (element) => {
 const getCurrentCity = () => {
     return getTextValue(textField)
 }
+
+
+
+// http://api.openweathermap.org/geo/1.0/direct?q=moscow&appid=bfcaae99fa5d3adb994759bb405071b9
