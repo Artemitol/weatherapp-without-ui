@@ -1,5 +1,4 @@
-import * as components from "./blocks/components"
-
+import * as components from "./blocks/components/index.js"
 
 const button = document.getElementById("weather-button")
 

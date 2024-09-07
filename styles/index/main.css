@@ -300,10 +300,10 @@ html {
 }
 
 .modal-frame {
-  z-index: 2;
-  width: 100%;
   height: -moz-fit-content;
   height: fit-content;
+  width: 100%;
+  z-index: 2;
 }
 .modal-frame * {
   -webkit-user-select: none;
@@ -320,7 +320,7 @@ html {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  overflow: hiden;
+  overflow: hidden;
   text-overflow: ellipsis;
   background-color: #ff3a3a;
   border-radius: var(--border-radius);

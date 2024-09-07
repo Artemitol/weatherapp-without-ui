@@ -62,9 +62,9 @@ function insertDataToTheCard(data) {
         weatherCard.classList.remove("hidden")
     }
 
-    cityNameDisplay.value = cityName
-    temperatureDisplay.value = `${temp} min: ${minTemp} max: ${maxTemp}`
-    typeDisplay.value = status
+    cityNameDisplay.prepend = cityName
+    temperatureDisplay.prepend = `${temp} min: ${minTemp} max: ${maxTemp}`
+    typeDisplay.prepend = status
 }
 
 async function getWeather(city, geocodingApiKey, weatherApiKey) {
