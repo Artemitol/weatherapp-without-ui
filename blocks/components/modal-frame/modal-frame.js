@@ -52,7 +52,7 @@ const modalFrame = class alertWindow {
         console.log(this)
         this.domLink.remove()
 
-        this.isExisting = false
+        this._isExisting = false
 
         return this
     }
