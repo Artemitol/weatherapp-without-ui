@@ -2,32 +2,46 @@ const weatherCard = document.getElementById("weather-card")
 const button = document.getElementById("weather-button")
 const textField = document.getElementById("weather-textfield")
 
-document.addEventListener("click", (Event) => {
-    const target = Event.target
+// Weather card display`s
+const typeDisplay = document.getElementById("typeof-weather")
+const temperatureDisplay = document.getElementById("temperature")
+const cityNameDisplay = document.getElementById("city-name")
+
+
+document.addEventListener("click", (event) => {
+    const target = event.target
 
     if (target === button) {
         buttonHandler()
+    }
+    else if (target.closest("#weather-card")) {
+        weatherCard.classList.add("hidden")
+
+        // Reseting input fields to avoid any problems in the future
+        cityNameDisplay.value = ""
+        temperatureDisplay.value = ""
+        typeDisplay.value = ""
     }
 })
 
 document.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-        buttonHandler(event)
+        buttonHandler()
     }
 })
 
-async function buttonHandler(event) {
+async function buttonHandler() {
     const cityName = getCurrentCity()
 
     try {
         const weatherApikey = await getApiKey("../../../weather-api-key.txt")
         const geocodingApiKey = await getApiKey("../../../geocoding-api-key.txt")
 
-        console.log(geocodingApiKey)
         if (cityName) {
             const weather = await getWeather(cityName, geocodingApiKey, weatherApikey)
+            weather.cityName = cityName
 
-            console.log(weather)
+            insertDataToTheCard(weather)
         }
         else {
             const alert = createAlertMessage("Error: enter city name")
@@ -41,14 +55,33 @@ async function buttonHandler(event) {
     }
 }
 
+function insertDataToTheCard(data) {
+    const {currentTemperature: temp, maxTemp, minTemp, weatherStatus: status, cityName} = data
+
+    if (weatherCard.classList.contains("hidden")) {
+        weatherCard.classList.remove("hidden")
+    }
+
+    cityNameDisplay.value = cityName
+    temperatureDisplay.value = `${temp} min: ${minTemp} max: ${maxTemp}`
+    typeDisplay.value = status
+}
+
 async function getWeather(city, geocodingApiKey, weatherApiKey) {
     try {
         const cityCoordinates = await getCityCoordinates(city, geocodingApiKey)
         const {lat, lon} = cityCoordinates
-        console.log(lat, lon)
+
         const weather = await getCityForecast({lat, lon, apiKey: weatherApiKey})
 
-        return weather
+        const result = {
+            currentTemperature: weather.main?.temp,
+            maxTemp: weather.main["temp_max"],
+            minTemp: weather.main["temp_min"],
+            weatherStatus: weather.weather[0].main
+        }
+
+        return result
     }
     catch(err) {
         throw new Error(`weather service not working, error message: ${err}`)
@@ -122,7 +155,7 @@ async function getCityCoordinates(cityName, apiKey) {
 }
 
 async function getCityForecast({lat, lon, apiKey}) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
 
     try {
         const responce = await request(url)
@@ -200,7 +233,3 @@ const getTextValue = (element) => {
 const getCurrentCity = () => {
     return getTextValue(textField)
 }
-
-
-
-// http://api.openweathermap.org/geo/1.0/direct?q=moscow&appid=bfcaae99fa5d3adb994759bb405071b9

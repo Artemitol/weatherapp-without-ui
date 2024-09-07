@@ -73,7 +73,6 @@ ul, ol {
   --h6-font-size: 20px;
   --p-font-size: 18px;
   --site-padding-x: 100px;
-  --header-height: 50px;
   --alerts-row-gap: 4px;
   --font-family-main: "Space Grotesk", sans-serif;
   --font-style: normal;
@@ -288,8 +287,9 @@ html {
 }
 
 .header {
+  height: -moz-fit-content;
+  height: fit-content;
   width: 100vw;
-  height: var(--header-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -313,11 +313,15 @@ html {
 .modal-frame__inner {
   padding-inline: 20px;
   width: 100%;
-  height: 70px;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  overflow: hiden;
+  text-overflow: ellipsis;
   background-color: #ff3a3a;
   border-radius: var(--border-radius);
   color: var(--color-light);

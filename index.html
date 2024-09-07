@@ -12,7 +12,7 @@
             <header class="header">
                 <div class="header__inner">
                     <div class="header__text">
-                        Weather app without ui
+                        <h4>Weather app without ui</h4>
                     </div>
                 </div>
             </header>
@@ -26,15 +26,14 @@
                         <div class="weather-app__weather-card hidden" id="weather-card">
                             <div class="weather-app__title">
                                 <div class="text-display">
-                                    <input 
-                                        readonly 
-                                        type="text" 
+                                    <h4 
                                         class="
                                             weather-app__city-name
                                             text-display__value
                                             text-display__value--centered-text
                                         "
-                                    >
+                                        id="city-name"
+                                    ></h4>
                                 </div>
                             </div>
                             <div class="weather-app__content">
@@ -44,26 +43,24 @@
                                         text-display--with-label
                                     "
                                 >
-                                    <label class="text-display__label" for="">Temperature</label>
-                                    <input 
-                                        readonly 
-                                        type="text" 
+                                    <p class="text-display__label">Temperature</p>
+                                    <p 
                                         class="
                                             text-display__value 
                                             text-display__value--color-accent
                                         "
-                                    >
+                                        id="temperature"
+                                    ></p>
                                 </div>
                                 <div class="weather-app__typeof-weather text-display text-display--with-label">
-                                    <label class="text-display__label" for="">Type of weather</label>
-                                    <input 
+                                    <p class="text-display__label">Type of weather</p>
+                                    <p
                                         class="
                                             text-display__value 
                                             text-display__value--color-accent
                                         "
-                                        readonly 
-                                        type="text" 
-                                    >
+                                        id="typeof-weather"
+                                    ></p>
                                 </div>
                             </div>
                         </div>
