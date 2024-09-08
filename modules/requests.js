@@ -1,7 +1,7 @@
 const request = class requestClass {
     _url = null
     _status = null
-    _responce
+    _responce = null
 
     constructor(url) {
         this._url = url
@@ -13,7 +13,7 @@ const request = class requestClass {
 
         if (request.status === 200) {
             this._status = "ok"
-            this._responce = request.json
+            this._responce = request.responce
         } 
         else {
             this._status = "error"
@@ -21,8 +21,6 @@ const request = class requestClass {
             console.log(`request with url:${this._url} failed, status was not 200`)
             throw new Error("something went wrong while fetching")
         }
-
-        return this
     }
 
 
@@ -34,15 +32,21 @@ const request = class requestClass {
     get status() {
         return this._status
     }
+
+    get responce() {
+        return this._responce
+    }
 }
 
+// This class helps to make requests for the coodrinates of city
 const coordinates = class cityCoordinates extends request {
+    _cityName = null
     _apiKey = null
     _lat = null
     _lon = null
-
-    constructor(url) {
-        this._url = url
+    
+    constructor(apiKey) {
+        this._apiKey = apiKey
     }
 
 
@@ -54,7 +58,12 @@ const coordinates = class cityCoordinates extends request {
     async getCityCoord() {
         try {
             // using getData() from parrent class 'request'
-            const request = await this.getData()
+            await this.getData()
+
+            const coordinates = this._responce?.features[0].geometry.coordinates
+
+            this._lon = coordinates[0]
+            this._lat = coordinates[1]
         }
         catch(err) {
             console.log(`cant get city coord by url: ${this._url}`)
@@ -68,6 +77,25 @@ const coordinates = class cityCoordinates extends request {
         return this._lat
     }
     
+    get lon() {
+        return this._lon
+    }
+
+    get cityName() {
+        return this._cityName
+    }
+    set cityName(value) {
+        this._cityName = value
+    }
+
+    get apiKey() {
+        return this._apiKey
+    }
+
+    get lat() {
+        return this._lat
+    }
+
     get lon() {
         return this._lon
     }
