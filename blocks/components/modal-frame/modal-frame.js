@@ -30,12 +30,12 @@ const modalFrame = class alertWindow {
 
         elementInner.append(message, icon)
         element.append(elementInner)
-
-        icon.onclick = this.delete
-
+        
         this._domLink = element 
         this._messageNode = message
         this._isExisting = true
+        
+        icon.onclick = this.delete.bind(this)
 
         return this
     }
@@ -48,15 +48,13 @@ const modalFrame = class alertWindow {
         return this
     }
 
-    delete() {
-        console.log(this)
-        this.domLink.remove()
+    delete() {  
+        this._domLink.remove()
 
         this._isExisting = false
 
         return this
     }
-
 
     // Getters and seters
     get type() {
@@ -83,6 +81,4 @@ const modalFrame = class alertWindow {
     }
 }
 
-const testClass = new modalFrame("Error")
-
-console.log(testClass.show())
+export { modalFrame } 
