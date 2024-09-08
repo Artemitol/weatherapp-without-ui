@@ -1,23 +1,21 @@
 const request = class requestClass {
     _url = null
-    _status = null
-    _responce = null
+    _response = null
 
     constructor(url) {
         this._url = url
     }
 
     // Functions
-    async getData() {
+    async getJson() {
         const request = await fetch(this.url)
 
-        if (request.status === 200) {
-            this._status = "ok"
-            this._responce = request.responce
+        if (request.status == 200) {
+            this._response = await request.json()
+
+            return this._response
         } 
-        else {
-            this._status = "error"
-            
+        else {            
             console.log(`request with url:${this._url} failed, status was not 200`)
             throw new Error("something went wrong while fetching")
         }
@@ -29,12 +27,8 @@ const request = class requestClass {
         return this._url
     }
 
-    get status() {
-        return this._status
-    }
-
-    get responce() {
-        return this._responce
+    get response() {
+        return this._response
     }
 }
 
@@ -46,28 +40,39 @@ const coordinates = class cityCoordinates extends request {
     _lon = null
     
     constructor(apiKey) {
+        super()
         this._apiKey = apiKey
     }
 
 
     // Functions
-    async getApiKey() {
-
-    }
-
     async getCityCoord() {
-        try {
-            // using getData() from parrent class 'request'
-            await this.getData()
+        if (this._cityName) {
+            try {
+                this._url = "http://api.openweathermap.org/geo/1.0/direct?q=" + this._cityName + "&limit=1&appid=" + this._apiKey
 
-            const coordinates = this._responce?.features[0].geometry.coordinates
+                // using getJson() from parrent class 'request'
+                await this.getJson()
 
-            this._lon = coordinates[0]
-            this._lat = coordinates[1]
+                const coordinates = this._response[0]
+    
+                this._lat = coordinates.lat
+                this._lon = coordinates.lon
+
+                const result = {
+                    lon: this._lon, 
+                    lat: this._lat     
+                }
+
+                return result
+            }
+            catch(err) {
+                console.log(`cant get city coord by url: ${this._url}`)
+                throw new Error(err)
+            }
         }
-        catch(err) {
-            console.log(`cant get city coord by url: ${this._url}`)
-            throw new Error(err)
+        else {
+            console.log("trying to get coordinates without city name")
         }
     }
 
@@ -86,10 +91,6 @@ const coordinates = class cityCoordinates extends request {
     }
     set cityName(value) {
         this._cityName = value
-    }
-
-    get apiKey() {
-        return this._apiKey
     }
 
     get lat() {
