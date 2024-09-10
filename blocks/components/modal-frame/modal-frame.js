@@ -13,7 +13,7 @@ const modalFrame = class alertWindow {
     }
 
 
-    // functions
+    // This function creating card, but not adding to the DOM
     create(messageText = this._type) {
         const element = document.createElement("div")
         const elementInner = document.createElement("div")
@@ -40,7 +40,9 @@ const modalFrame = class alertWindow {
         return this
     }
 
+    // This method shows card on user screen
     show() {
+        // Geting alerts container, DOM element which created to store all alerts
         const modalFramesContainer = document.getElementById("alerts-container")
 
         modalFramesContainer.prepend(this._domLink)
@@ -48,13 +50,17 @@ const modalFrame = class alertWindow {
         return this
     }
 
-    delete() {  
-        this._domLink.remove()
-
+    // deleting card, timeout is allowed
+    delete(delay = 0) {  
+        // multiplicated by 1000 because setTimeout works with milisecconds
+        setTimeout(delay * 1000, this._domLink.remove())
+        
+        // Also turning flag in "false" state because card now is not existing
         this._isExisting = false
 
         return this
     }
+
 
     // Getters and seters
     get type() {
@@ -69,6 +75,9 @@ const modalFrame = class alertWindow {
             this._message = value
 
             this._messageNode.innerText = value
+        } 
+        else {
+            throw new Error("cant edit message text, becase message card is not existing")
         }
     }
 
