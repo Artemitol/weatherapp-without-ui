@@ -1,5 +1,6 @@
 import * as components from "./blocks/components/index.js"
-import * as requests from "./modules/requests.js"
+import { request } from "./modules/request.js"
+import { weather } from "./modules/weather.js"
 
 const button = document.getElementById("weather-button")
 
