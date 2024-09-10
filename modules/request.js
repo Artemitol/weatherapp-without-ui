@@ -6,7 +6,7 @@ const request = class requestClass {
         this._url = url
     }
 
-    
+
     // Functions
     async getJson() {
         const request = await fetch(this.url)

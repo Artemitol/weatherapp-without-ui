@@ -1,5 +1,6 @@
 import { request } from "./request.js"
 
+// Class helps working with openweathermap api
 const weather = class weatherForecast extends request {
     _apiKey = null
     _temp = null

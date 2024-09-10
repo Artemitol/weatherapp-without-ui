@@ -1,6 +1,5 @@
 import * as components from "./blocks/components/index.js"
-import { request } from "./modules/request.js"
-import { weather } from "./modules/weather.js"
+import * as modules from "./modules/index.js"
 
 const button = document.getElementById("weather-button")
 
@@ -18,5 +17,5 @@ document.addEventListener('keypress', () => {
     }
 })
 
-const apiKey = "yWp9t1cjlgYOVAtUhh4xjebR3LsgOvD9"
 const apiKeyWeathermap = "bfcaae99fa5d3adb994759bb405071b9"
+

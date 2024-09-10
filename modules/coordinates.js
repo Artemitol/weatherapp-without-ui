@@ -1,4 +1,4 @@
-import { request } from "./request"
+import { request } from "./request.js"
 
 // This class helps to make requests for the coodrinates of city
 const coordinates = class cityCoordinates extends request {
@@ -70,4 +70,4 @@ const coordinates = class cityCoordinates extends request {
     }
 }
 
-export { coordinates } 
+export { coordinates }
