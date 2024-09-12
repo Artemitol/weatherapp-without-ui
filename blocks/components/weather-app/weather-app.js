@@ -233,3 +233,31 @@ const getTextValue = (element) => {
 const getCurrentCity = () => {
     return getTextValue(textField)
 }
+
+const weatherCa = class weather {
+    _temp = null
+    _tempMax = null
+    _tempMin = null 
+
+    constructor() {
+
+    }
+
+
+    //  Geters and seters
+    get temp() {
+        return this._temp
+    }
+
+    get tempMin() {
+        return this._tempMin
+    }
+    
+    get tempMax() {
+        return this._tempMax
+    }
+
+
+    // Functions
+    
+}
