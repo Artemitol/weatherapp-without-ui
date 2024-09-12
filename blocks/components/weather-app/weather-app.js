@@ -1,13 +1,3 @@
-const weatherCard = document.getElementById("weather-card")
-const button = document.getElementById("weather-button")
-const textField = document.getElementById("weather-textfield")
-
-// Weather card display`s
-const typeDisplay = document.getElementById("typeof-weather")
-const temperatureDisplay = document.getElementById("temperature")
-const cityNameDisplay = document.getElementById("city-name")
-
-
 document.addEventListener("click", (event) => {
     const target = event.target
 
@@ -234,7 +224,7 @@ const getCurrentCity = () => {
     return getTextValue(textField)
 }
 
-const weatherCa = class weather {
+const weatherCard = class weather {
     _temp = null
     _tempMax = null
     _tempMin = null 
@@ -298,4 +288,14 @@ const weatherCa = class weather {
 
         this._isExisting = false
     }
+
+    // method clears all fields value
+    clear() {
+        this.temp = ""
+        this.tempMax = ""
+        this.tempMin = ""
+        this.cityName = ""
+    }
 }
+
+export { weatherCard }
