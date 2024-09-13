@@ -1,4 +1,4 @@
-const modalFrame = class alertWindow {
+class modalFrame {
     _type = null
     _domLink = null
     _message = null
@@ -81,8 +81,8 @@ const modalFrame = class alertWindow {
     // deleting card, timeout is allowed
     delete(delay = 0) {  
         // multiplicated by 1000 because setTimeout works with milisecconds
-        setTimeout(delay * 1000, this._domLink.remove())
-        
+        setTimeout(() => { this._domLink.remove() }, delay * 1000)
+
         // Also turning flag in "false" state because card now is not existing
         this._isExisting = false
 
