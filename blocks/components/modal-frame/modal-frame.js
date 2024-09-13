@@ -4,16 +4,44 @@ const modalFrame = class alertWindow {
     _message = null
     _messageNode = null
     _isExisting = false
-
+    
     constructor(type) {
         this._type = type
         this._message = type
-
+        
         this.create()
+    }
+    
+    
+    // Geters and seters
+    get domLink() {
+        return this._domLink
+    }
+
+    get isExisting() {
+        return this._isExisting
+    }
+
+    get type() {
+        return this._type
+    }
+
+    get message() {
+        return this._message
+    }
+    set message(value) {
+        if (this._isExisting) {
+            this._message = value
+
+            this._messageNode.innerText = value
+        } 
+        else {
+            throw new Error("cant edit message text, becase message card is not existing")
+        }
     }
 
 
-    // This function creating card, but not adding to the DOM
+    // creating card, but not adding to the DOM
     create(messageText = this._type) {
         const element = document.createElement("div")
         const elementInner = document.createElement("div")
@@ -40,7 +68,7 @@ const modalFrame = class alertWindow {
         return this
     }
 
-    // This method shows card on user screen
+    // shows card on user screen
     show() {
         // Geting alerts container, DOM element which created to store all alerts
         const modalFramesContainer = document.getElementById("alerts-container")
@@ -59,34 +87,6 @@ const modalFrame = class alertWindow {
         this._isExisting = false
 
         return this
-    }
-
-
-    // Getters and seters
-    get type() {
-        return this._type
-    }
-
-    get message() {
-        return this._message
-    }
-    set message(value) {
-        if (this._isExisting) {
-            this._message = value
-
-            this._messageNode.innerText = value
-        } 
-        else {
-            throw new Error("cant edit message text, becase message card is not existing")
-        }
-    }
-
-    get domLink() {
-        return this._domLink
-    }
-
-    get isExisting() {
-        return this._isExisting
     }
 }
 

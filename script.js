@@ -18,11 +18,17 @@ document.addEventListener('keypress', (event) => {
     }
 })
 
-function buttonHandler() {
-    console.log(modules)
+async function buttonHandler() {
+    const coordinatesModule = new modules.cityCoordinates(apiKeyWeathermap)
+    const weatherModule = new modules.weather(apiKeyWeathermap)
+    console.log(components)
+
+    // const coordinates = await coordinatesModule.getCityCoord()
+    // const temp = await weatherModule.getCurrentWeather(coordinates.lat, coordinates.lon)
+
 }
 
-function enterHandler() {
+async function enterHandler() {
 
 }
 

@@ -13,6 +13,31 @@ class cityCoordinates extends requests {
     }
 
 
+    // Geters and seters
+    get lat() {
+        return this._lat
+    }
+    
+    get lon() {
+        return this._lon
+    }
+
+    get cityName() {
+        return this._cityName
+    }
+    set cityName(value) {
+        this._cityName = value
+    }
+
+    get lat() {
+        return this._lat
+    }
+
+    get lon() {
+        return this._lon
+    }
+
+
     // Functions
     async getCityCoord() {
         if (this._cityName) {
@@ -42,31 +67,6 @@ class cityCoordinates extends requests {
         else {
             console.log("trying to get coordinates without city name")
         }
-    }
-
-
-    // Geters and seters
-    get lat() {
-        return this._lat
-    }
-    
-    get lon() {
-        return this._lon
-    }
-
-    get cityName() {
-        return this._cityName
-    }
-    set cityName(value) {
-        this._cityName = value
-    }
-
-    get lat() {
-        return this._lat
-    }
-
-    get lon() {
-        return this._lon
     }
 }
 

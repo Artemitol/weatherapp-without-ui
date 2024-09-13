@@ -9,6 +9,12 @@ class weather extends requests {
         super()
         this._apiKey = apiKey
     }
+    
+
+    // Geters and seters
+    get temp() {
+        return this._temp
+    }
 
 
     // Functions
@@ -28,11 +34,6 @@ class weather extends requests {
             console.log("failed to get weather, something went wrong with openweathermap")
             throw new Error("something went wrong while trying to get weather from api")
         }
-    }
-    
-    // Geters and seters
-    get temp() {
-        return this._temp
     }
 }
 
