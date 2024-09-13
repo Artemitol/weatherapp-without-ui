@@ -1,7 +1,7 @@
-import { request } from "./request.js"
+import { requests } from "./request.js"
 
 // This class helps to make requests for the coodrinates of city
-const coordinates = class cityCoordinates extends request {
+class cityCoordinates extends requests {
     _cityName = null
     _apiKey = null
     _lat = null
@@ -70,4 +70,4 @@ const coordinates = class cityCoordinates extends request {
     }
 }
 
-export { coordinates }
+export { cityCoordinates }

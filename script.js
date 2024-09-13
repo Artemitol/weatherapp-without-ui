@@ -2,20 +2,28 @@ import * as components from "./blocks/components/index.js"
 import * as modules from "./modules/index.js"
 
 const button = document.getElementById("weather-button")
+const apiKeyWeathermap = "bfcaae99fa5d3adb994759bb405071b9"
 
-document.addEventListener("click", () => {
-    const target = Event.target
+document.addEventListener("click", (event) => {
+    const target = event.target
 
     if (target === button) {
-        console.log("button")
+        buttonHandler()
     }
 })
 
-document.addEventListener('keypress', () => {
-    if (Event.key === "enter") {
-        console.log("enter")
+document.addEventListener('keypress', (event) => {
+    if (event.key === "enter") {
+        enterHandler()
     }
 })
 
-const apiKeyWeathermap = "bfcaae99fa5d3adb994759bb405071b9"
+function buttonHandler() {
+    console.log(modules)
+}
+
+function enterHandler() {
+
+}
+
 

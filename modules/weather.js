@@ -1,7 +1,7 @@
-import { request } from "./request.js"
+import { requests } from "./request.js"
 
 // Class helps working with openweathermap api
-const weather = class weatherForecast extends request {
+class weather extends requests {
     _apiKey = null
     _temp = null
 

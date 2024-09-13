@@ -1,4 +1,4 @@
-const request = class requestClass {
+class requests {
     _url = null
     _response = null
 
@@ -33,4 +33,4 @@ const request = class requestClass {
     }
 }
 
-export { request }
+export { requests }
